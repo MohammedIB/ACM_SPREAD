@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
-st.logo("logo.png", icon_image="logo.png")
+st.logo("logo.png", size="medium", icon_image="logo.png")
 
 st.markdown("# Courbe Spread")
 st.sidebar.markdown("# Courbe Spread")

@@ -13,8 +13,8 @@ import plotly.express as px
 with st.sidebar:
     st.image("logo.png", use_column_width=True)
 
-st.markdown("# Courbe Spread")
-st.sidebar.markdown("# Courbe Spread")
+    st.markdown("# Courbe Spread")
+    st.sidebar.markdown("# Courbe Spread")
 
 Spreads = pd.read_excel('Spreads.xlsx')
 

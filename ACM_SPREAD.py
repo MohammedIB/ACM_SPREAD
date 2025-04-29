@@ -82,7 +82,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
         y='Spread',
         markers=True,
         title=f"Courbe de Spreads - {emetteur}",
-        labels={'Maturite_Num': 'Maturité (années)', 'Spread': 'Spread (%)'}
+        labels={'Maturite': 'Maturité (années)', 'Spread': 'Spread (%)'}
     )
     fig.update_traces(
             hovertemplate='<b>Maturité</b>: %{x} <br><b>Spread</b>: %{y:.2%}<extra></extra>'

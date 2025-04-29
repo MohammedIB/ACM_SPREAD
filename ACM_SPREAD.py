@@ -38,11 +38,11 @@ def Courbe_Spreads(fichier_excel, emetteur):
     def convertir_maturite(val):
         if '52 SEM' in val:
             return 1 
-        else if '26 SEM' in val:
+        elif '26 SEM' in val:
             return 0.5
-        else if '13 SEM' in val:
+        elif '13 SEM' in val:
             return 0.25
-        else if '1 MOIS' in val:
+        elif '1 MOIS' in val:
             return 0.083
         else:
             return int(val.split()[0])  # prendre le nombre d'années

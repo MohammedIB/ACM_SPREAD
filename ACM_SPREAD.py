@@ -125,9 +125,7 @@ if code_isin:
             maturites = df_curve['Maturite_Num'].values
             spreads = df_curve['Spread'].values
             spread_interp = np.interp(maturite_residuelle, maturites, spreads)
-            ecart = spread_marche - spread_interp
 
-            couleur = "🟢" if ecart < 0 else "🔴"
 
             st.sidebar.markdown("### Résultat")
             st.sidebar.markdown(f"**Émetteur :** {emetteur}")
@@ -135,4 +133,4 @@ if code_isin:
             st.sidebar.markdown(f"**Émission :** {emission}")
             st.sidebar.markdown(f"**Échéance :** {echeance}")
             st.sidebar.markdown(f"**Maturité résiduelle :** `{maturite_residuelle:.2f}` ans")
-            st.sidebar.markdown(f"**Spread observé :** `{spread_marche:.2%}`")
+            st.sidebar.markdown(f"**Spread à l'émission :** `{spread_marche:.2%}`")

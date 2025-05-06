@@ -133,7 +133,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
                 st.sidebar.markdown(f"**Code ISIN :** `{code_isin}`")
                 st.sidebar.markdown(f"**Émission :** {emission}")
                 st.sidebar.markdown(f"**Échéance :** {echeance}")
-                st.sidebar.markdown(f"**Maturité résiduelle :** `{maturite_residuelle:.2f}` ans")
+                st.sidebar.markdown(f"**Maturité résiduelle :** `{maturite_residuelle:.2f}` jours")
                 st.sidebar.markdown(f"**Spread à l'émission :** `{spread_marche:.2%}`")
                 st.sidebar.markdown(f"**Spread marché :** `{spread_interp:.2%}`")
 

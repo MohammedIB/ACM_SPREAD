@@ -49,6 +49,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
             return int(val.split()[0])  # prendre le nombre d'années
 
     df['Maturite_Num'] = df['Maturite'].apply(convertir_maturite)
+    df['Maturite_Init_Jrs'] = (df['Echeance'] - df['Emission']).dt.days
 
     # Filtrer sur l'émetteur si besoin
     if emetteur:

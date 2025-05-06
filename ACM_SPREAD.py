@@ -123,7 +123,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
                 df_curve = df_latest.copy()
                 df_curve = df_curve.sort_values(by='Maturite_Jours')
     
-                maturites = df_curve['Maturite_Jours'].values
+                maturites = df_curve['Maturite_Init_Jrs'].values
                 spreads = df_curve['Spread'].values
                 spread_interp = np.interp(maturite_residuelle, maturites, spreads)
     

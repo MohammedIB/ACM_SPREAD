@@ -114,16 +114,16 @@ def Courbe_Spreads(fichier_excel, emetteur):
     
             # Maturité résiduelle
             today = pd.Timestamp(datetime.today().date())
-            maturite_residuelle = (ligne['Echeance'] - today).days / 365
+            maturite_residuelle = (ligne['Echeance'] - today).days
     
             if maturite_residuelle <= 0:
                 st.sidebar.warning("Ce titre est déjà arrivé à échéance.")
             else:
                 # Courbe interpolée
                 df_curve = df_latest.copy()
-                df_curve = df_curve.sort_values(by='Maturite_Num')
+                df_curve = df_curve.sort_values(by='Maturite_Jours')
     
-                maturites = df_curve['Maturite_Num'].values
+                maturites = df_curve['Maturite_Jours'].values
                 spreads = df_curve['Spread'].values
                 spread_interp = np.interp(maturite_residuelle, maturites, spreads)
     
@@ -135,6 +135,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
                 st.sidebar.markdown(f"**Échéance :** {echeance}")
                 st.sidebar.markdown(f"**Maturité résiduelle :** `{maturite_residuelle:.2f}` ans")
                 st.sidebar.markdown(f"**Spread à l'émission :** `{spread_marche:.2%}`")
+                st.sidebar.markdown(f"**Spread marché :** `{spread_interp:.2%}`")
 
 Courbe_Spreads("Spreads.xlsx", Emetteur)
 

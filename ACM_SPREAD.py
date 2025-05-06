@@ -121,7 +121,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
             else:
                 # Courbe interpolée
                 df_curve = df_latest.copy()
-                df_curve = df_curve.sort_values(by='Maturite_Jours')
+                df_curve = df_curve.sort_values(by='Maturite_Init_Jrs')
     
                 maturites = df_curve['Maturite_Init_Jrs'].values
                 spreads = df_curve['Spread'].values

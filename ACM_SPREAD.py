@@ -19,7 +19,6 @@ Spreads = pd.read_excel('Spreads.xlsx')
 
 Emetteur = st.sidebar.selectbox("Choisir un emetteur", Spreads['Emetteur'].unique())
 
-Ligne = st.sidebar.text_input("Code ISIN")
 
 def Courbe_Spreads(fichier_excel, emetteur):
 
@@ -95,3 +94,45 @@ def Courbe_Spreads(fichier_excel, emetteur):
     st.plotly_chart(fig, use_container_width=True)
 
 Courbe_Spreads("Spreads.xlsx", Emetteur)
+code_isin = st.sidebar.text_input("Entrez un Code ISIN")
+
+if code_isin:
+    ligne_isin = df[df['Code ISIN'].astype(str) == code_isin]
+
+    if ligne_isin.empty:
+        st.sidebar.warning("Code ISIN non trouvé.")
+    else:
+        ligne = ligne_isin.iloc[0]
+
+        # Infos de base
+        emission = ligne['Emission'].strftime('%d/%m/%Y')
+        echeance = ligne['Echeance'].strftime('%d/%m/%Y')
+        maturite_nominale = ligne['Maturite']
+        spread_marche = ligne['Spread']
+        emetteur = ligne['Emetteur']
+
+        # Maturité résiduelle
+        today = pd.Timestamp(datetime.today().date())
+        maturite_residuelle = (ligne['Echeance'] - today).days / 365
+
+        if maturite_residuelle <= 0:
+            st.sidebar.warning("Ce titre est déjà arrivé à échéance.")
+        else:
+            # Courbe interpolée
+            df_curve = df_latest.copy()
+            df_curve = df_curve.sort_values(by='Maturite_Num')
+
+            maturites = df_curve['Maturite_Num'].values
+            spreads = df_curve['Spread'].values
+            spread_interp = np.interp(maturite_residuelle, maturites, spreads)
+            ecart = spread_marche - spread_interp
+
+            couleur = "🟢" if ecart < 0 else "🔴"
+
+            st.sidebar.markdown("### Résultat")
+            st.sidebar.markdown(f"**Émetteur :** {emetteur}")
+            st.sidebar.markdown(f"**Code ISIN :** `{code_isin}`")
+            st.sidebar.markdown(f"**Émission :** {emission}")
+            st.sidebar.markdown(f"**Échéance :** {echeance}")
+            st.sidebar.markdown(f"**Maturité résiduelle :** `{maturite_residuelle:.2f}` ans")
+            st.sidebar.markdown(f"**Spread observé :** `{spread_marche:.2%}`")

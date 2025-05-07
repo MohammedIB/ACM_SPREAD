@@ -53,7 +53,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
         code_str = code_str.lstrip('0')  # on enlève les zéros en tête
         return code_str
         
-    df['Code ISIN'] = df['Code ISIN'].apply(Formater_CodeISIN)
+    df['Code_ISIN'] = df['Code ISIN'].apply(Formater_CodeISIN)
     df['Maturite_Num'] = df['Maturite'].apply(convertir_maturite)
     df['Maturite_Init_Jrs'] = (df['Echeance'] - df['Emission']).dt.days
 
@@ -71,10 +71,10 @@ def Courbe_Spreads(fichier_excel, emetteur):
     df_latest = df_latest.sort_values(by='Maturite_Num')
     
     # -- Ici on formate pour le tableau affiché --
-    df_affichage = df_latest[['Code ISIN', 'Emission', 'Echeance', 'Maturite', 'Spread']].copy()
+    df_affichage = df_latest[['Code_ISIN', 'Emission', 'Echeance', 'Maturite', 'Spread']].copy()
 
     # Format des colonnes
-    df_affichage['Code ISIN'] = df_affichage['Code ISIN'].astype(str)
+    df_affichage['Code_ISIN'] = df_affichage['Code_ISIN'].astype(str)
     df_affichage['Emission'] = df_affichage['Emission'].dt.strftime('%d/%m/%Y')
     df_affichage['Echeance'] = df_affichage['Echeance'].dt.strftime('%d/%m/%Y')
     df_affichage['Spread'] = (df_affichage['Spread'] * 100).round(2).astype(str) + '%'
@@ -104,7 +104,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
     code_isin = st.sidebar.text_input("Entrez un Code ISIN")
     
     if code_isin:
-        ligne_isin = df[df['Code ISIN'].astype(str) == code_isin]
+        ligne_isin = df[df['Code_ISIN'].astype(str) == code_isin]
     
         if ligne_isin.empty:
             st.sidebar.warning("Code ISIN non trouvé.")

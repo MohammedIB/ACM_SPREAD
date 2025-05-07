@@ -48,7 +48,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
             return 0.083
         else:
             return int(val.split()[0])  # prendre le nombre d'années
-    def Formater_CodeISIN(code):
+    def Formater_CodeISIN(isin):
         code = isin[:-1]
         code_str = ''.join(re.findall(r'\d+', code))
         code_str = code_str.lstrip('0')

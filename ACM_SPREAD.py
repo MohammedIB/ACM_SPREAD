@@ -53,6 +53,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
         code_str = code_str.lstrip('0')  # on enlève les zéros en tête
         return code_str
         
+    df['Code ISIN'] = df['Code ISIN'].astype(str)    
     df['Code_ISIN'] = df['Code ISIN'].apply(Formater_CodeISIN)
     df['Maturite_Num'] = df['Maturite'].apply(convertir_maturite)
     df['Maturite_Init_Jrs'] = (df['Echeance'] - df['Emission']).dt.days

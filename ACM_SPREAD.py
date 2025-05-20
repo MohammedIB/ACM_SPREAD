@@ -103,7 +103,7 @@ def Courbe_Spreads(fichier_excel, emetteur):
         yaxis=dict(tickformat=".2%"),
         template="plotly_white"
     )
-    st.plotly_chart(fig, use_container_width=True)
+    #st.plotly_chart(fig, use_container_width=True)
     code_isin = st.sidebar.text_input("Entrez un Code ISIN")
     
     if code_isin:
